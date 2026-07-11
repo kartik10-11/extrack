@@ -81,6 +81,9 @@ router.delete('/:id', async (req, res) => {
 // Edit member name
 router.put('/:id/members/:memberId', async (req, res) => {
   try {
+    if (!req.params.memberId || req.params.memberId === 'undefined') {
+      return res.status(400).json({ message: 'Invalid member ID' });
+    }
     const group = await Group.findOne({ _id: req.params.id, owner: req.userId });
     if (!group) return res.status(404).json({ message: 'Group not found' });
     const member = group.members.id(req.params.memberId);
@@ -96,9 +99,12 @@ router.put('/:id/members/:memberId', async (req, res) => {
 // Delete member
 router.delete('/:id/members/:memberId', async (req, res) => {
   try {
+    if (!req.params.memberId || req.params.memberId === 'undefined') {
+      return res.status(400).json({ message: 'Invalid member ID' });
+    }
     const group = await Group.findOne({ _id: req.params.id, owner: req.userId });
     if (!group) return res.status(404).json({ message: 'Group not found' });
-    group.members.pull(req.params.memberId);
+    group.members.pull({ _id: req.params.memberId });
     await group.save();
     res.json(group);
   } catch (err) {
