@@ -1,15 +1,16 @@
-// The app's signature visual detail: every amount renders in a tabular
-// monospace "ledger" style, colored by sign, so money always reads like money.
+import { useCurrency } from '../context/CurrencyContext.jsx';
+
 const MoneyText = ({ value, className = '' }) => {
+  const { currency } = useCurrency();
   const isNegative = value < 0;
   const color = value > 0 ? 'text-forest-400' : value < 0 ? 'text-coral' : 'text-ink/60';
-  const formatted = Math.abs(value).toLocaleString(undefined, {
+  const formatted = Math.abs(value).toLocaleString(currency.locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
   return (
     <span className={`font-mono tabular ${color} ${className}`}>
-      {isNegative ? '\u2212' : ''}${formatted}
+      {isNegative ? '−' : ''}{currency.symbol}{formatted}
     </span>
   );
 };

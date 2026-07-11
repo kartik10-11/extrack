@@ -22,7 +22,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-forest-700">
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 w-full max-w-sm shadow-xl">
-        <p className="font-display text-2xl font-semibold mb-1">Ledger</p>
+        <p className="font-display text-2xl font-semibold mb-1">Extrack</p>
         <p className="text-ink/50 text-sm mb-6">Create your account</p>
         {error && <p className="text-coral text-sm mb-3">{error}</p>}
         <label className="text-sm block mb-3">

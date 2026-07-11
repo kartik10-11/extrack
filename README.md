@@ -1,4 +1,4 @@
-# Ledger — Personal Budget Tracker
+# EXTRACK — Personal Budget Tracker
 
 A full-stack personal finance app: log income/expenses, set category budgets,
 visualize spending, and split shared expenses with a group. Built with
@@ -108,7 +108,7 @@ just your hosting provider's IPs (optional, but more secure than `0.0.0.0/0`).
 
 ### 4. Connect them
 Go back to Render → your backend's environment variables → set
-`CLIENT_URL = https://ledger.vercel.app` (no trailing slash) → redeploy.
+`CLIENT_URL = https://Extrack.vercel.app` (no trailing slash) → redeploy.
 This tells the backend's CORS policy to trust requests from your live frontend.
 
 Open your Vercel URL — you're live and publishable.
