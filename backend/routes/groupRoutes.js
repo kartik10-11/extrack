@@ -78,5 +78,31 @@ router.delete('/:id', async (req, res) => {
   await Settlement.deleteMany({ group: group._id });
   res.json({ message: 'Deleted' });
 });
+// Edit member name
+router.put('/:id/members/:memberId', async (req, res) => {
+  try {
+    const group = await Group.findOne({ _id: req.params.id, owner: req.userId });
+    if (!group) return res.status(404).json({ message: 'Group not found' });
+    const member = group.members.id(req.params.memberId);
+    if (!member) return res.status(404).json({ message: 'Member not found' });
+    member.name = req.body.name;
+    await group.save();
+    res.json(group);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
+// Delete member
+router.delete('/:id/members/:memberId', async (req, res) => {
+  try {
+    const group = await Group.findOne({ _id: req.params.id, owner: req.userId });
+    if (!group) return res.status(404).json({ message: 'Group not found' });
+    group.members.pull(req.params.memberId);
+    await group.save();
+    res.json(group);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 export default router;
